@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "es5",
+    "module": "ES2015",
+    "lib": [
+      "dom",
+      "es2020"
+    ],
+    "jsx": "react",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "noUnusedLocals": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "moduleResolution": "node",
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+}
