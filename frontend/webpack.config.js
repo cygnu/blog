@@ -33,13 +33,11 @@ module.exports = {
   
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
-    alias: {
-      '@': path.resolve(__dirname, 'src/'),
-    }
   },
   
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
+    historyApiFallback: true,
     publicPath: "dist",
     host: "localhost",
     port: "3000",

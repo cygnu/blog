@@ -1,17 +1,17 @@
 build:
-	docker-compose build
+	docker-compose --file docker-compose.yaml build
 ps:
 	docker-compose ps
+images:
+	docker-compose images
 up:
-	docker-compose up -d
+	docker-compose --file docker-compose.yaml up --detach
 logs:
 	docker-compose logs
 down:
-	docker-compose down
-down.a:
-	docker-compose down --rmi all
+	docker-compose --file docker-compose.yaml down --rmi all
 restart:
-	@make down
+	docker-compose --file docker-compose.yaml down
 	@make up
 makemigrations:
 	docker-compose run --rm backend python manage.py makemigrations

@@ -1,11 +1,19 @@
-FROM node:14.16
-RUN mkdir -p /work/frontend
-WORKDIR /work/frontend
+FROM node:14.16-alpine AS builder
+WORKDIR /build
+
 COPY . .
 
-RUN npm install
-RUN npm run build
-RUN rm -rf ./node_modules &&\
-    npm install --production
+RUN npm install && \
+    npm run build
 
-CMD [ "npm", "dev" ]
+FROM node:14.16-alpine
+RUN mkdir -p /work/frontend
+WORKDIR /work/frontend
+
+COPY package*.json ./
+
+RUN npm install --production --cache /tmp/empty-cache && \
+    rm -rf /tmp/empty-cache
+COPY --from=builder /build/dist ./dist
+
+CMD [ "npm", "run", "dev" ]

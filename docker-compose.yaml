@@ -1,11 +1,12 @@
 version: '3.7'
 services:
   db:
-    image: postgres:12.6
+    image: postgres:12.6-alpine
+    container_name: db
     volumes:
       - postgres_data_volume:/var/lib/postgresql/data
     ports:
-      - "5432"
+      - "5432:5432"
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${DATABASE_USER}
@@ -15,6 +16,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     command: python manage.py runserver 0.0.0.0:8000
+    container_name: backend
     volumes:
       - ./backend:/work/backend
     env_file:
@@ -27,6 +29,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    container_name: frontend
     volumes:
       - ./frontend:/work/frontend
     ports:

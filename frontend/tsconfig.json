@@ -7,21 +7,24 @@
       "dom",
       "es2020"
     ],
-    "jsx": "react",
+    "jsx": "preserve",
+    "jsxFactory": "jsx",
+    "jsxImportSource": "@emotion/react",
     "esModuleInterop": true,
     "sourceMap": true,
     "outDir": "./dist",
     "removeComments": true,
     "noUnusedLocals": true,
+    "noUnusedParameters": false,
     "typeRoots": [
       "node_modules/@types"
     ],
-    "moduleResolution": "node",
+    "moduleResolution": "node"
   },
   "include": [
     "src/**/*"
   ],
   "exclude": [
     "node_modules"
-  ],
+  ]
 }
