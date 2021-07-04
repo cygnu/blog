@@ -33,8 +33,20 @@ services:
     volumes:
       - ./docker/frontend:/work/frontend
       - node_modules_volume:/work/frontend/node_modules
+    tty: true
     ports:
       - "3000:3000"
+  web:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./docker/frontend/dist:/var/www
+      - ./docker/nginx/defalut.conf:/etc/nginx/conf.d/defalut.conf
+    ports:
+      - "8080:80"
+    depends_on:
+      - frontend
 volumes:
   postgres_data_volume:
   node_modules_volume:
