@@ -1,20 +1,33 @@
 build:
 	docker-compose --file docker-compose.yaml build
+build-prod:
+	docker-compose --file docker-compose.prod.yaml build
+rebuild:
+	docker-compose --file docker-compose.yaml up --detach --no-deps --build frontend
+rebuild-prod:
+	docker-compose --file docker-compose.prod.yaml up --detach --no-deps --build frontend
 ps:
 	docker-compose ps
 images:
 	docker-compose images
 up:
 	docker-compose --file docker-compose.yaml up --detach
+up-prod:
+	docker-compose --file docker-compose.prod.yaml up --detach
 logs:
 	docker-compose logs
 down:
 	docker-compose --file docker-compose.yaml down --rmi all
+down-prod:
+	docker-compose --file docker-compose.prod.yaml down --rmi all
 destroy:
 	docker-compose --file docker-compose.yaml down --rmi all --volumes
 restart:
 	docker-compose --file docker-compose.yaml down
 	@make up
+restart-prod:
+	docker-compose --file docker-compose.prod.yaml down
+	@make up-prod
 db:
 	docker-compose exec db ash
 backend:

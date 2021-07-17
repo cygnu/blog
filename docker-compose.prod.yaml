@@ -28,7 +28,7 @@ services:
   frontend:
     build:
       context: ./docker/frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     container_name: frontend
     volumes:
       - ./docker/frontend:/work/frontend
@@ -44,7 +44,7 @@ services:
       - ./docker/frontend/dist:/var/www
       - ./docker/nginx/defalut.conf:/etc/nginx/conf.d/defalut.conf
     ports:
-      - "8080:80"
+      - "8080:8000"
     depends_on:
       - frontend
 volumes:

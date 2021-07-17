@@ -1,40 +1,42 @@
 version: '3.7'
 services:
-  db:
-    image: postgres:12.6-alpine
-    container_name: db
-    volumes:
-      - postgres_data_volume:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${DATABASE_USER}
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-  backend:
-    build:
-      context: ./docker/backend
-      dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
-    container_name: backend
-    volumes:
-      - ./docker/backend:/work/backend
-    env_file:
-      - ./.env
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
+#  db:
+#    image: postgres:12.6-alpine
+#    container_name: db
+#    volumes:
+#      - postgres_data_volume:/var/lib/postgresql/data
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      - POSTGRES_DB=${POSTGRES_DB}
+#      - POSTGRES_USER=${DATABASE_USER}
+#      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+#  backend:
+#    build:
+#      context: ./docker/backend
+#      dockerfile: Dockerfile
+#    command: python manage.py runserver 0.0.0.0:8000
+#    container_name: backend
+#    volumes:
+#      - ./docker/backend:/work/backend
+#    env_file:
+#      - ./.env
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - db
   frontend:
     build:
       context: ./docker/frontend
       dockerfile: Dockerfile
     container_name: frontend
     volumes:
-      - ./docker/frontend:/work/frontend
-      - node_modules_volume:/work/frontend/node_modules
+      - ./docker/frontend/src:/work/frontend/src
+      - ./docker/frontend/dist:/work/frontend/dist
+      - ./docker/webpack/package*.json:/work/frontend/package*.json
+      - /work/frontend/node_modules
     ports:
       - "3000:3000"
+    command: sh -c "npm start"
 volumes:
   postgres_data_volume:
-  node_modules_volume:

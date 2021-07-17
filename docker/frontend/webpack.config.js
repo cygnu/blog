@@ -13,11 +13,10 @@ module.exports = {
   
   plugins: [
     new HtmlWebpackPlugin({
-      filename: "index.html",
-      template: "./index.html",
+      template: "index.html",
     }),
   ],
-  
+
   module: {
     rules: [
       {
@@ -34,15 +33,13 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
   },
-  
+
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
     historyApiFallback: true,
-    publicPath: "dist",
-  },
-
-  cache: {
-    type: "filesystem",
-    cacheDirectory: path.resolve(__dirname, '.temp_cache'),
+    hot: true,
+    host: "0.0.0.0",
+    port: 3000,
+    open: true,
   },
 };

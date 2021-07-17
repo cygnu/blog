@@ -2,9 +2,10 @@ FROM node:14.16-alpine
 RUN mkdir -p /work/frontend
 WORKDIR /work/frontend
 
+COPY package*.json ./
+RUN npm install -y
 COPY . .
 
-RUN npm install -y
 RUN npm run build
 
-CMD ["npm", "run", "start"]
+EXPOSE 3000
