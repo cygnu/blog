@@ -31,12 +31,9 @@ services:
       dockerfile: Dockerfile
     container_name: frontend
     volumes:
-      - ./docker/frontend/src:/work/frontend/src
-      - ./docker/frontend/dist:/work/frontend/dist
-      - ./docker/webpack/package*.json:/work/frontend/package*.json
+      - ./docker/frontend:/work/frontend
       - /work/frontend/node_modules
     ports:
       - "3000:3000"
-    command: sh -c "npm start"
 volumes:
   postgres_data_volume:
